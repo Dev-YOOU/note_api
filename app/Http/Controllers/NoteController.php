@@ -52,7 +52,7 @@ class NoteController extends Controller
 
         $validated = $request->validated();
 
-        $note->update($validated->only(['title', 'content']));
+        $note->update($request->safe()->only(['title', 'content']));
 
         if ($request->has('tags')) {
             $this->syncTags($request->user(), $note, $validated['tags']);
